@@ -1,0 +1,1 @@
+#MyAndroidProject - This is a sample "TodoNotes" Android Studio Project, where one can login and maintain their notes.
