@@ -84,7 +84,7 @@ public class MyNotesActivity : AppCompatActivity() {
     private fun addNotesToDb(notes: Notes) {
         val notesApp = applicationContext as NotesApp
         val notesDao = notesApp.getNotesDb().NotesDao()
-        notesDao.insert()
+        notesDao.insert(notes)
     }
 
     private fun setupRecyclerView() {
