@@ -20,11 +20,7 @@
         <activity android:name=".view.MainActivity" />
         <activity android:name=".view.DetailActivity"/>
         <activity android:name=".view.MyNotesActivity"/>
-        <activity android:name=".view.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.RUN"/>
-            </intent-filter>
-        </activity>
+        <activity android:name=".view.LoginActivity"/>
     </application>
 
 </manifest>

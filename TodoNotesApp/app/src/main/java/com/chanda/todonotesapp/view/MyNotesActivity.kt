@@ -37,6 +37,7 @@ public class MyNotesActivity : AppCompatActivity() {
         setupToolbarText()
         getDatafromDatabase()
         clickListeners()
+        setupRecyclerView()
     }
 
     private fun setupSharedPreference() {
@@ -54,7 +55,7 @@ public class MyNotesActivity : AppCompatActivity() {
 
     private fun getDatafromDatabase() {
         val notesApp = applicationContext as NotesApp
-        val notesDao = notesApp.getNotesDb().NotesDao()
+        val notesDao = notesApp.getNotesDb().notesDao()
         listNotes.addAll(notesDao.getAll())
     }
 
@@ -74,7 +75,6 @@ public class MyNotesActivity : AppCompatActivity() {
                 val notes = Notes(title = title, description = description)
                 listNotes.add(notes)
                 addNotesToDb(notes)
-                setupRecyclerView()
                 dialog.hide()
             }
         })
@@ -83,12 +83,18 @@ public class MyNotesActivity : AppCompatActivity() {
 
     private fun addNotesToDb(notes: Notes) {
         val notesApp = applicationContext as NotesApp
-        val notesDao = notesApp.getNotesDb().NotesDao()
+        val notesDao = notesApp.getNotesDb().notesDao()
         notesDao.insert(notes)
     }
 
     private fun setupRecyclerView() {
         val itemClickListener = object : ItemClickListener {
+
+            override fun onUpdate(notes: Notes) {
+                val notesApp = applicationContext as NotesApp
+                val notesDao = notesApp.getNotesDb().notesDao()
+                notesDao.updateNotes(notes)
+            }
             override fun onClick(notes: Notes) {
                 val intent = Intent(this@MyNotesActivity, DetailActivity::class.java)
                 intent.putExtra(AppConstant.TITLE, notes.title)
@@ -97,11 +103,6 @@ public class MyNotesActivity : AppCompatActivity() {
 
             }
 
-            override fun onUpdate(notes: Notes) {
-                val notesApp = applicationContext as NotesApp
-                val notesDao = notesApp.getNotesDb().NotesDao()
-                notesDao.updateNotes(notes)
-            }
         }
         val notesAdapter = NotesAdapter(listNotes, itemClickListener)
         val linearLayoutManager = LinearLayoutManager(this@MyNotesActivity)
