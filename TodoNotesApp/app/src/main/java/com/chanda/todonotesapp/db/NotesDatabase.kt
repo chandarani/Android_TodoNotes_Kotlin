@@ -7,7 +7,9 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [Notes::class], version = 1)
 abstract class NotesDatabase : RoomDatabase(){
-    abstract fun notesDao(): NotesDao companion object {
+    abstract fun notesDao(): NotesDao
+
+    companion object {
         lateinit var INSTANCE : NotesDatabase
         fun getInstance(context: Context): NotesDatabase{
             synchronized(NotesDatabase::class){
