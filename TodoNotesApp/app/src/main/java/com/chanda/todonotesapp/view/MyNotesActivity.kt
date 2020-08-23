@@ -23,7 +23,7 @@ import com.chanda.todonotesapp.db.Notes
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 public class MyNotesActivity : AppCompatActivity() {
-    lateinit var fullName: String
+    var fullName: String = ""
     lateinit var buttonAddNotes: FloatingActionButton
     lateinit var sharedPreferences: SharedPreferences
     lateinit var recyclerView: RecyclerView
