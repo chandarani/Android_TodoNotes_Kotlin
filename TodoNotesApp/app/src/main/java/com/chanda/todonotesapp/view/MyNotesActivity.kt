@@ -1,5 +1,6 @@
 package com.chanda.todonotesapp.view
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -24,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 public class MyNotesActivity : AppCompatActivity() {
     var fullName: String = ""
+    val ADD_NOTES_CODE = 100
     lateinit var buttonAddNotes: FloatingActionButton
     lateinit var sharedPreferences: SharedPreferences
     lateinit var recyclerView: RecyclerView
@@ -48,7 +50,9 @@ public class MyNotesActivity : AppCompatActivity() {
     private fun clickListeners() {
         buttonAddNotes.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                setupDialog()
+                //setupDialog()
+                val intent = Intent(this@MyNotesActivity,AddNotesActivity::class.java)
+                startActivityForResult(intent,ADD_NOTES_CODE )
             }
         })
     }
@@ -78,6 +82,7 @@ public class MyNotesActivity : AppCompatActivity() {
                 dialog.hide()
             }
         })
+
         dialog.show()
     }
 
@@ -134,6 +139,7 @@ public class MyNotesActivity : AppCompatActivity() {
         buttonAddNotes = findViewById(R.id.fabAddNotes)
         recyclerView = findViewById(R.id.recyclerViewNotes)
     }
+
 }
 
 
