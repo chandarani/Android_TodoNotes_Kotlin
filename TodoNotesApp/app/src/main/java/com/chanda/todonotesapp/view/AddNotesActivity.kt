@@ -78,16 +78,12 @@ class AddNotesActivity : AppCompatActivity() {
                 REQUEST_CODE_GALLERY -> {
                     val selectedImage = data?.data
                     val filePath = arrayOf(MediaStore.Images.Media.DATA)
-                    val c = selectedImage?.let { contentResolver.query(it,filePath,null,null,null) }
-                    if (c != null) {
-                        c.moveToFirst()
-                    }
-                    val columnIndex = c?.getColumnIndex(filePath[0])
-                    if (c != null) {
-                        picturePath = columnIndex?.let { c.getString(it) }.toString()
-                    }
-                    c?.close()
+                    val c = contentResolver.query(selectedImage, filePath,null,null,null)
+                    c.moveToFirst()
+                    val columnIndex = c.getColumnIndex(filePath[0])
+                    picturePath = c.getString(columnIndex)
                     Glide.with(this).load(picturePath).into(imageViewNotes)
+                    c.close()
                 }
                 REQUEST_CODE_CAMERA -> {
 
