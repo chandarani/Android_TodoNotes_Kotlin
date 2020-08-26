@@ -55,6 +55,7 @@ public class MyNotesActivity : AppCompatActivity() {
                 startActivityForResult(intent,ADD_NOTES_CODE )
             }
         })
+
     }
 
     private fun getDatafromDatabase() {
@@ -134,10 +135,23 @@ public class MyNotesActivity : AppCompatActivity() {
         }
     }
 
-
     private fun bindViews() {
         buttonAddNotes = findViewById(R.id.fabAddNotes)
         recyclerView = findViewById(R.id.recyclerViewNotes)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == ADD_NOTES_CODE){
+            val title = data?.getStringExtra(AppConstant.TITLE)
+            val description = data?.getStringExtra(AppConstant.DESCRIPTION)
+            val imagePath = data?.getStringExtra(AppConstant.IMAGE_PATH)
+
+            val notes = Notes(title = title!!, description = description!!, imagePath = imagePath!!, isTaskCompleted = false)
+            addNotesToDb(notes)
+            listNotes.add(notes)
+            recyclerView.adapter?.notifyItemChanged(listNotes.size - 1)
+        }
     }
 
 }

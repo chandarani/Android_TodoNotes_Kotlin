@@ -12,20 +12,18 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintStart_toEndOf="@id/checkboxMarkStatus"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imageView"
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/textViewTitle"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -45,6 +43,14 @@
             app:layout_constraintBottom_toBottomOf="@id/textViewDescription"
             app:layout_constraintStart_toStartOf="parent"/>
 
+        <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imageView"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewDescription"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
