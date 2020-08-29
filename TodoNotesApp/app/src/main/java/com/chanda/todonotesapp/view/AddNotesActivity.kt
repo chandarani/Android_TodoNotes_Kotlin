@@ -75,7 +75,7 @@ class AddNotesActivity : AppCompatActivity() {
         if (storagePermission != PackageManager.PERMISSION_GRANTED){
             listPermissionNeeded.add(android.Manifest.permission.READ_EXTERNAL_STORAGE)
         }
-        if (listPermissionNeeded.isEmpty()){
+        if (listPermissionNeeded.isNotEmpty()){
             ActivityCompat.requestPermissions(this, listPermissionNeeded.toTypedArray<String>(), MY_PERMISSION_CODE)
             return false
         }
@@ -116,7 +116,7 @@ class AddNotesActivity : AppCompatActivity() {
             }
         })
         textViewGallery.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(p0: View?) {
+            override fun onClick(v: View?) {
                 val intent = Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                 startActivityForResult(intent, REQUEST_CODE_GALLERY)
                 dialog.hide()
