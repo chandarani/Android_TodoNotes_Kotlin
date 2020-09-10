@@ -1,6 +1,8 @@
 package com.chanda.todonotesapp.utils
 
 object PrefConstant {
+    val ON_BOARDED_SUCCESSFULLY = "on_boarded_successfully"
+
     @JvmField
     var SHARED_PREFERENCE_NAME = "notes_app_pref"
     @JvmField

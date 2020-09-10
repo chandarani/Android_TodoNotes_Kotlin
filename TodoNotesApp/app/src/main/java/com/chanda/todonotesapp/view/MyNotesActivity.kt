@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -14,6 +16,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.Constraints
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.chanda.todonotesapp.NotesApp
 import com.chanda.todonotesapp.utils.AppConstant
 import com.chanda.todonotesapp.utils.PrefConstant
@@ -21,7 +26,9 @@ import com.chanda.todonotesapp.R
 import com.chanda.todonotesapp.adapter.NotesAdapter
 import com.chanda.todonotesapp.clickListeners.ItemClickListener
 import com.chanda.todonotesapp.db.Notes
+import com.chanda.todonotesapp.workmanager.MyWorker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.concurrent.TimeUnit
 
 public class MyNotesActivity : AppCompatActivity() {
     var fullName: String = ""
@@ -40,6 +47,17 @@ public class MyNotesActivity : AppCompatActivity() {
         getDatafromDatabase()
         clickListeners()
         setupRecyclerView()
+        setupWorkManager()
+    }
+
+    private fun setupWorkManager() {
+        val constraint = Constraints.Builder()
+                .build()
+        val request = PeriodicWorkRequest
+                .Builder(MyWorker::class.java,1,TimeUnit.MINUTES)
+                .setConstraints(constraint)
+                .build()
+        WorkManager.getInstance().enqueue(request)
     }
 
     private fun setupSharedPreference() {
@@ -154,6 +172,20 @@ public class MyNotesActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.blog){
+            val intent = Intent(this@MyNotesActivity,BlogActivity::class.java)
+            startActivity(intent)
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }
 
 

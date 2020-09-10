@@ -1,6 +1,8 @@
 package com.chanda.todonotesapp.view
 
 import android.app.Activity
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -22,20 +24,25 @@ import com.chanda.todonotesapp.BuildConfig
 import com.chanda.todonotesapp.R
 import com.chanda.todonotesapp.utils.AppConstant
 import java.io.File
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class AddNotesActivity : AppCompatActivity() {
 
+    companion object {
+        private const val MY_PERMISSION_CODE = 124
+        private const val REQUEST_CODE_CAMERA = 1
+        private const val REQUEST_CODE_GALLERY = 2
+    }
     lateinit var editTextTitle: EditText
     lateinit var editTextDescription: EditText
     lateinit var imageViewNotes: ImageView
     lateinit var buttonSubmit: Button
-    val REQUEST_CODE_GALLERY = 2
-    val REQUEST_CODE_CAMERA = 1
     var picturePath = ""
-    val MY_PERMISSION_CODE = 124
+    private lateinit var imageLocation: File
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_notes)
@@ -117,7 +124,7 @@ class AddNotesActivity : AppCompatActivity() {
         })
         textViewGallery.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                val intent = Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                 startActivityForResult(intent, REQUEST_CODE_GALLERY)
                 dialog.hide()
             }
@@ -126,6 +133,8 @@ class AddNotesActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    @SuppressLint("SimpleDateFormat")
+    @Throws(IOException::class)
     private fun createImage(): File? {
         val timeStamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
         val fileName = "JPEG_" + timeStamp + "_"
