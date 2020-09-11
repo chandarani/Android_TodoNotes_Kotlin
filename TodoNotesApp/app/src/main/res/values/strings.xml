@@ -2,4 +2,26 @@
     <string name="app_name">TodoNotes </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logo">logo</string>
+    <string name="mindorks_notes_app">Mindorks Notes App</string>
+    <string name="your_own_todo_notes_app">your_own_todo_notes_app</string>
+    <string name="next">next</string>
+    <string name="create_your_own_todo_for_the_day">create_your_own_todo_for_the_day</string>
+    <string name="orgnaise_it_with_perfection">orgnaise_it_with_perfection</string>
+    <string name="done">done</string>
+    <string name="back">back</string>
+    <string name="add_notes_with_images_either_from_camera_or_your_gallery">add_notes_with_images_either_from_camera_or_your_gallery</string>
+    <string name="welcome">welcome</string>
+    <string name="plan_and_record_your_todo_on_your_phone">plan_and_record_your_todo_on_your_phone</string>
+    <string name="full_name">full_name</string>
+    <string name="user_name">user_name</string>
+    <string name="login">login</string>
+    <string name="title">title</string>
+    <string name="select_image">select_image</string>
+    <string name="description">description</string>
+    <string name="submit">submit</string>
+    <string name="empty_string_error">fields cannot be empty</string>
+    <string name="camera">camera</string>
+    <string name="gallery">gallery</string>
+    <string name="select_picker">select_picker</string>
 </resources>

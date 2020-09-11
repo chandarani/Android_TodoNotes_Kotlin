@@ -7,6 +7,11 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".NotesApp"
         android:allowBackup="true"
@@ -16,15 +21,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".onboarding.OnBoardingActivity"
+        <activity
+            android:name=".onboarding.OnBoardingActivity"
             android:theme="@style/NoToolBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".view.BlogActivity" />
+        <activity android:name=".blog.BlogActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -36,22 +38,31 @@
                 android:resource="@xml/provider_path" />
         </provider>
 
+        <activity
+            android:name=".addnotes.AddNotesActivity"
+            android:theme="@style/NoToolBar" />
+        <activity
+            android:name=".splash.SplashActivity"
+            android:theme="@style/NoToolBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".mynotes.MyNotesActivity" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:theme="@style/NoToolBar" />
+        <activity android:name=".detail.DetailActivity" />
+
         <service
-            android:name=".fcm.MyFirebaseMessagingService"
+            android:name="com.chanda.todonotesapp.utils.fcm.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <activity android:name=".view.AddNotesActivity" />
-        <activity android:name=".view.SplashActivity">
-
-        </activity>
-        <activity android:name=".view.MainActivity" />
-        <activity android:name=".view.DetailActivity" />
-        <activity android:name=".view.MyNotesActivity" />
-        <activity android:name=".view.LoginActivity" />
     </application>
 
 </manifest>

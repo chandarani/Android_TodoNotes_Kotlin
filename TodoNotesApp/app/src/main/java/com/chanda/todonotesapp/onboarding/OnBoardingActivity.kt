@@ -1,14 +1,13 @@
 package com.chanda.todonotesapp.onboarding
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.chanda.todonotesapp.R
-import com.chanda.todonotesapp.utils.PrefConstant
-import com.chanda.todonotesapp.view.LoginActivity
+import com.chanda.todonotesapp.data.local.pref.PrefConstant
+import com.chanda.todonotesapp.data.local.pref.StoreSession
+import com.chanda.todonotesapp.login.LoginActivity
 
 
 class OnBoardingActivity : AppCompatActivity(), OnBoardingOneFragment.OnNextClick, OnBoardingTwoFragment.OnOptionClick {
@@ -18,9 +17,8 @@ class OnBoardingActivity : AppCompatActivity(), OnBoardingOneFragment.OnNextClic
         private const val LAST_ITEM = 1
     }
 
-    lateinit var viewPager: ViewPager
-    lateinit var sharedPreferences: SharedPreferences
-    lateinit var editor: SharedPreferences.Editor
+    private lateinit var viewPager: ViewPager2
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +28,13 @@ class OnBoardingActivity : AppCompatActivity(), OnBoardingOneFragment.OnNextClic
     }
 
     private fun setupSharedPreference() {
-        sharedPreferences = getSharedPreferences(PrefConstant.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE)
+        StoreSession.init(this)
     }
 
     private fun bindView() {
         viewPager = findViewById(R.id.viewPager)
-        val adapter = FragmentAdapter(supportFragmentManager)
-        viewPager.adapter = adapter
+        val pageAdapter = FragmentAdapter(this)
+        viewPager.adapter = pageAdapter
     }
 
     override fun onClick() {
@@ -48,9 +46,7 @@ class OnBoardingActivity : AppCompatActivity(), OnBoardingOneFragment.OnNextClic
     }
 
     override fun onOptionDone() {
-        editor = sharedPreferences.edit()
-        editor.putBoolean(PrefConstant.ON_BOARDED_SUCCESSFULLY,true)
-        editor.apply()
+        StoreSession.write(PrefConstant.ON_BOARDED_SUCCESSFULLY, true)
         navigateToLogin()
     }
 

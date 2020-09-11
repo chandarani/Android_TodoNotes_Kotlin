@@ -42,16 +42,6 @@ class OnBoardingOneFragment : Fragment() {
 
     private fun bindViews(view: View) {
         buttonNext = view.findViewById<Button>(R.id.buttonNext)
-        clickListeners()
-    }
-
-    private fun clickListeners() {
-        buttonNext.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(p0: View?) {
-
-            }
-
-        })
     }
 
     interface OnNextClick {

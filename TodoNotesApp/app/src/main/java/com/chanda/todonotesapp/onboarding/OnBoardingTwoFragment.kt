@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.chanda.todonotesapp.R
-import kotlinx.android.synthetic.main.fragment_on_boarding_two.*
 
 
 class OnBoardingTwoFragment : Fragment() {
 
-    private lateinit var buttonDone: Button
+    private lateinit var buttonNext: Button
     private lateinit var buttonBack: Button
     private lateinit var onOptionClick: OnOptionClick
 
@@ -35,7 +34,7 @@ class OnBoardingTwoFragment : Fragment() {
 
     private fun bindViews(view: View) {
         buttonBack = view.findViewById(R.id.buttonBack)
-        buttonDone = view.findViewById(R.id.buttonDone)
+        buttonNext = view.findViewById(R.id.buttonDone)
     }
 
     private fun setupClickListener() {
@@ -46,7 +45,7 @@ class OnBoardingTwoFragment : Fragment() {
 
         })
 
-        buttonDone.setOnClickListener(object : View.OnClickListener {
+        buttonNext.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 onOptionClick.onOptionDone()
             }
