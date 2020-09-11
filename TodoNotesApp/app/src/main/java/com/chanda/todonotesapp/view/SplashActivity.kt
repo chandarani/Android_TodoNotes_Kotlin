@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.chanda.todonotesapp.R
+import com.chanda.todonotesapp.onboarding.OnBoardingActivity
 import com.chanda.todonotesapp.utils.PrefConstant
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -50,16 +51,13 @@ class SplashActivity : AppCompatActivity(){
             val intent = Intent(this@SplashActivity, MyNotesActivity::class.java)
             startActivity(intent)
         }else{
-
-            if (isBoardingSuccess){
+            if (isBoardingSuccess) {
                 val intent = Intent(this@SplashActivity, LoginActivity::class.java)
                 startActivity(intent)
             }else{
-                val intent = Intent(this@SplashActivity, onBoardActivity::class.java)
+                val intent = Intent(this@SplashActivity, OnBoardingActivity::class.java)
                 startActivity(intent)
             }
-
-
         }
     }
 

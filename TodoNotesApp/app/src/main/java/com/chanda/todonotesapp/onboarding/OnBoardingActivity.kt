@@ -1,5 +1,6 @@
-cdpackage com.chanda.todonotesapp.onboarding
+package com.chanda.todonotesapp.onboarding
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +8,6 @@ import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
 import com.chanda.todonotesapp.R
 import com.chanda.todonotesapp.utils.PrefConstant
-import com.chanda.todonotesapp.utils.StoreSession
 import com.chanda.todonotesapp.view.LoginActivity
 
 
@@ -19,6 +19,8 @@ class OnBoardingActivity : AppCompatActivity(), OnBoardingOneFragment.OnNextClic
     }
 
     lateinit var viewPager: ViewPager
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +30,13 @@ class OnBoardingActivity : AppCompatActivity(), OnBoardingOneFragment.OnNextClic
     }
 
     private fun setupSharedPreference() {
-        StoreSession.init(this)
+        sharedPreferences = getSharedPreferences(PrefConstant.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE)
     }
 
     private fun bindView() {
         viewPager = findViewById(R.id.viewPager)
-        val pageAdapter = FragmentAdapter(this)
-        viewPager.adapter = pageAdapter
+        val adapter = FragmentAdapter(supportFragmentManager)
+        viewPager.adapter = adapter
     }
 
     override fun onClick() {
@@ -46,7 +48,9 @@ class OnBoardingActivity : AppCompatActivity(), OnBoardingOneFragment.OnNextClic
     }
 
     override fun onOptionDone() {
-        StoreSession.write(PrefConstant.ON_BOARDED_SUCCESSFULLY, true)
+        editor = sharedPreferences.edit()
+        editor.putBoolean(PrefConstant.ON_BOARDED_SUCCESSFULLY,true)
+        editor.apply()
         navigateToLogin()
     }
 

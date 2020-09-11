@@ -47,7 +47,7 @@ class OnBoardingOneFragment : Fragment() {
 
     private fun clickListeners() {
         buttonNext.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?) {
+            override fun onClick(p0: View?) {
 
             }
 
